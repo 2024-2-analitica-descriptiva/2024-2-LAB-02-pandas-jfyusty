@@ -20,3 +20,21 @@ def pregunta_10():
     D                   1:2:3:5:5:7
     E   1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
+
+    import pandas as pd
+
+    # Cargar el archivo tbl0.tsv
+    tbl0 = pd.read_csv('files/input/tbl0.tsv', sep='\t')
+
+    # Agrupar por 'c1' y construir una lista separada por ':' de los valores de 'c2'
+    resultado = tbl0.groupby('c1')['c2'].apply(lambda x: ':'.join(map(str, sorted(x))))
+    
+    # Convertir la Serie en DataFrame
+    resultado_df = resultado.reset_index(name='c2')
+    
+    # Retornar el DataFrame ajustado
+    return resultado_df.set_index('c1')
+
+# Llamar a la función y obtener los resultados
+pg_10 = pregunta_10()
+print(pg_10)

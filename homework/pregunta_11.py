@@ -22,3 +22,16 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
+
+    import pandas as pd
+
+    # Cargar el archivo tbl1.tsv
+    tbl1 = pd.read_csv('files/input/tbl1.tsv', sep='\t')
+
+    # Agrupar por 'c0', ordenar los valores de 'c4' alfabéticamente y construir una lista separada por ','
+    tbl1_agrupado = tbl1.groupby('c0')['c4'].apply(lambda x: ','.join(sorted(x))).reset_index()
+    return tbl1_agrupado
+
+# Llamar a la función y obtener los resultados
+pg_11 = pregunta_11()
+print(pg_11)

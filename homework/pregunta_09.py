@@ -23,3 +23,19 @@ def pregunta_09():
     39  39  E   5  1998-01-26  1998
 
     """
+
+    import pandas as pd
+
+    # Cargar el archivo tbl0.tsv
+    tbl0 = pd.read_csv('files/input/tbl0.tsv', sep='\t')
+
+    # Hacer una copia del DataFrame original
+    tbl0 = tbl0.copy()
+
+    # Extraer el año directamente de la columna 'c3' como texto antes del primer '-'
+    tbl0['year'] = tbl0['c3'].astype(str).str.split('-').str[0]
+    return tbl0
+
+# Llamar a la función y obtener los resultados
+pg_9 = pregunta_09()
+print(pg_9)

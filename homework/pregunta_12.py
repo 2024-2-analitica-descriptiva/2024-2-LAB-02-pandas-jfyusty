@@ -22,3 +22,20 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
+
+    import pandas as pd
+
+    # Cargar el archivo tbl2.tsv
+    tbl2 = pd.read_csv('files/input/tbl2.tsv', sep='\t')
+
+    # Combinar los valores de 'c5a' y 'c5b' en una nueva columna unida por ':'
+    tbl2['c5'] = tbl2['c5a'].astype(str) + ':' + tbl2['c5b'].astype(str)
+
+    # Agrupar por 'c0' y construir una lista separada por ',' de los valores combinados de 'c5'
+    tbl2_agrupado = tbl2.groupby('c0')['c5'].apply(lambda x: ','.join(sorted(x))).reset_index()
+
+    return tbl2_agrupado
+
+# Llamar a la función y obtener los resultados
+pg_12 = pregunta_12()
+print(pg_12)
